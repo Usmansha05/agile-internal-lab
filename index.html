@@ -7,6 +7,7 @@
   <style>
     * {margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
     body {background:#f9fafc;color:#222;scroll-behavior:smooth;}
+    section {padding:80px 10%;text-align:center;}
 
     /* NAVBAR */
     header {
@@ -19,7 +20,9 @@
     nav ul {display:flex;list-style:none;gap:25px;}
     nav a {text-decoration:none;color:#333;font-weight:500;transition:color .3s;}
     nav a:hover {color:#10b981;}
+    .menu {display:none;font-size:1.6em;cursor:pointer;}
 
+    /* BUTTONS */
     .btn {
       border:none;cursor:pointer;padding:10px 20px;border-radius:6px;
       font-weight:600;transition:all .3s ease;
@@ -39,13 +42,16 @@
     .hero p {font-size:1.2rem;margin-bottom:25px;line-height:1.5;}
 
     /* FEATURES */
-    section {padding:80px 10%;text-align:center;}
-    .features h2, .process h2, .pricing h2 {font-size:2rem;margin-bottom:40px;}
+    .features h2, .process h2, .pricing h2, .testimonials h2 {
+      font-size:2rem;margin-bottom:40px;
+    }
     .feature-cards {display:flex;flex-wrap:wrap;justify-content:center;gap:30px;}
     .card {
       background:white;padding:25px;border-radius:12px;width:260px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.05);transition:transform .3s ease;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);transition:transform .3s ease, opacity .6s;
+      opacity:0;transform:translateY(20px);
     }
+    .card.visible {opacity:1;transform:translateY(0);}
     .card:hover {transform:translateY(-5px);}
 
     /* PROCESS */
@@ -54,15 +60,42 @@
     .step {
       background:white;padding:15px 25px;border-radius:10px;
       font-weight:500;box-shadow:0 2px 8px rgba(0,0,0,0.05);
+      opacity:0;transform:translateY(20px);transition:.6s;
     }
+    .step.visible {opacity:1;transform:translateY(0);}
     .step span {font-weight:700;color:#10b981;margin-right:8px;}
+
+    /* TESTIMONIALS */
+    .testimonials {
+      background:white;
+    }
+    .testimonial-cards {
+      display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
+    }
+    .testimonial {
+      background:#f3f4f6;padding:25px;border-radius:12px;width:280px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+      opacity:0;transform:translateY(30px);transition:.6s;
+    }
+    .testimonial.visible {opacity:1;transform:translateY(0);}
+    .testimonial p {
+      font-style:italic;margin-bottom:15px;color:#444;
+    }
+    .testimonial h4 {
+      color:#3b82f6;margin-bottom:3px;
+    }
+    .testimonial span {
+      font-size:0.9em;color:#555;
+    }
 
     /* PRICING */
     .pricing-cards {display:flex;justify-content:center;gap:30px;flex-wrap:wrap;}
     .price-card {
       background:white;padding:30px;border-radius:12px;width:260px;
       box-shadow:0 2px 10px rgba(0,0,0,0.05);
+      opacity:0;transform:translateY(20px);transition:.6s;
     }
+    .price-card.visible {opacity:1;transform:translateY(0);}
     .price-card.highlight {border:2px solid #10b981;}
     .price {font-size:1.8rem;margin:15px 0;color:#3b82f6;}
     .price-card ul {list-style:none;margin-bottom:20px;}
@@ -78,13 +111,12 @@
     /* Responsive */
     @media (max-width:768px) {
       nav ul {display:none;flex-direction:column;background:white;
-              position:absolute;top:60px;right:20px;width:150px;
-              border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+        position:absolute;top:60px;right:20px;width:150px;border-radius:8px;
+        box-shadow:0 2px 10px rgba(0,0,0,0.1);}
       nav ul.active {display:flex;}
-      .menu {display:block;cursor:pointer;font-size:1.6em;}
+      .menu {display:block;}
       header {padding:15px 25px;}
     }
-    @media (min-width:769px) {.menu{display:none;}}
   </style>
 </head>
 <body>
@@ -95,6 +127,7 @@
       <ul>
         <li><a href="#features">Features</a></li>
         <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -113,18 +146,9 @@
   <section class="features" id="features">
     <h2>Why Choose AgileFlow?</h2>
     <div class="feature-cards">
-      <div class="card">
-        <h3>🕒 Real-time Tracking</h3>
-        <p>Stay updated with every sprint and progress in real time.</p>
-      </div>
-      <div class="card">
-        <h3>📊 Smart Analytics</h3>
-        <p>Get insights into team performance and sprint velocity.</p>
-      </div>
-      <div class="card">
-        <h3>🤝 Team Collaboration</h3>
-        <p>Boost teamwork with instant updates and integrations.</p>
-      </div>
+      <div class="card"><h3>🕒 Real-time Tracking</h3><p>Stay updated with every sprint in real time.</p></div>
+      <div class="card"><h3>📊 Smart Analytics</h3><p>Get insights into performance and velocity.</p></div>
+      <div class="card"><h3>🤝 Team Collaboration</h3><p>Boost teamwork with instant updates.</p></div>
     </div>
   </section>
 
@@ -138,27 +162,37 @@
     </div>
   </section>
 
+  <section class="testimonials" id="testimonials">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial">
+        <p>“AgileFlow streamlined our sprint reviews and improved team communication instantly!”</p>
+        <h4>Priya Sharma</h4><span>Project Manager, CodeCraft</span>
+      </div>
+      <div class="testimonial">
+        <p>“Our project delivery time dropped by 30% — incredible!”</p>
+        <h4>Rahul Verma</h4><span>Scrum Master, NextGen Tech</span>
+      </div>
+      <div class="testimonial">
+        <p>“A must-have for any Agile team that values transparency and results.”</p>
+        <h4>Sarah Johnson</h4><span>CEO, InnovateHub</span>
+      </div>
+    </div>
+  </section>
+
   <section class="pricing" id="pricing">
     <h2>Pricing Plans</h2>
     <div class="pricing-cards">
       <div class="price-card">
         <h3>Starter</h3>
         <p class="price">₹499/mo</p>
-        <ul>
-          <li>5 Projects</li>
-          <li>Basic Analytics</li>
-          <li>Email Support</li>
-        </ul>
+        <ul><li>5 Projects</li><li>Basic Analytics</li><li>Email Support</li></ul>
         <button class="btn primary">Choose Plan</button>
       </div>
       <div class="price-card highlight">
         <h3>Pro</h3>
         <p class="price">₹999/mo</p>
-        <ul>
-          <li>Unlimited Projects</li>
-          <li>Advanced Analytics</li>
-          <li>Priority Support</li>
-        </ul>
+        <ul><li>Unlimited Projects</li><li>Advanced Analytics</li><li>Priority Support</li></ul>
         <button class="btn primary">Choose Plan</button>
       </div>
     </div>
@@ -171,27 +205,32 @@
   </footer>
 
   <script>
-    // Toggle mobile menu
-    const menu = document.querySelector('.menu');
-    const navLinks = document.querySelector('nav ul');
-    menu.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-    });
+    // Mobile menu
+    const menu=document.querySelector('.menu');
+    const navLinks=document.querySelector('nav ul');
+    menu.addEventListener('click',()=>navLinks.classList.toggle('active'));
 
-    // Smooth scroll for nav links
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', e => {
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(link=>{
+      link.addEventListener('click',e=>{
         e.preventDefault();
-        document.querySelector(link.getAttribute('href'))
-          .scrollIntoView({behavior:'smooth'});
+        document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
         navLinks.classList.remove('active');
       });
     });
 
+    // Scroll fade-in effect
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add('visible');}
+      });
+    },{threshold:0.2});
+    document.querySelectorAll('.card,.step,.price-card,.testimonial').forEach(el=>observer.observe(el));
+
     // Button click animation
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.style.transform = 'scale(0.95)';
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        btn.style.transform='scale(0.95)';
         setTimeout(()=>btn.style.transform='scale(1)',150);
       });
     });
